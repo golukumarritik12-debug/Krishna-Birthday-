@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Krishna 🎂</title>
+
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;min-height:100vh;text-align:center;
+ font-family:Arial,sans-serif;color:white;
+ background:linear-gradient(135deg,#210536,#720b63,#160b38);
+ overflow-x:hidden
+}
+button{
+ border:0;border-radius:25px;padding:14px 22px;
+ background:linear-gradient(45deg,#ff3987,#ffb347);
+ color:white;font-size:16px;font-weight:bold;
+ cursor:pointer;margin:10px
+}
+h1{color:#ffb9e0;text-shadow:0 0 18px #ff4fba}
+p{line-height:1.7}
+.screen{padding:25px 12px;max-width:650px;margin:auto}
+.hidden{display:none!important}
+#cakeArea{height:270px;position:relative;margin:20px auto}
+.cake{
+ position:absolute;left:50%;transform:translateX(-50%);
+ width:220px;height:45px;border-radius:15px;
+ background:linear-gradient(#ffb4d5,#ed4d91);
+ border-bottom:8px solid #a62b65;
+ opacity:0;animation:build .7s forwards
+}
+.c1{bottom:25px}
+.c2{bottom:68px;width:185px;animation-delay:.7s}
+.c3{bottom:111px;width:145px;animation-delay:1.4s}
+@keyframes build{
+ from{opacity:0;transform:translate(-50%,-180px) rotate(-10deg)}
+ to{opacity:1;transform:translate(-50%,0) rotate(0)}
+}
+.candle{
+ position:absolute;bottom:150px;left:calc(50% - 7px);
+ width:14px;height:48px;border-radius:4px;
+ background:repeating-linear-gradient(45deg,#fff 0 7px,#ff4b91 7px 14px);
+ opacity:0;animation:candleFall .8s 2.2s forwards
+}
+@keyframes candleFall{
+ from{opacity:0;transform:translateY(-150px)}
+ to{opacity:1;transform:translateY(0)}
+}
+.flame{
+ position:absolute;bottom:198px;left:calc(50% - 7px);
+ width:14px;height:22px;background:#ffcf40;
+ border-radius:50% 50% 40% 40%;
+ box-shadow:0 0 22px #ffb300;
+ animation:flicker .35s infinite alternate
+}
+@keyframes flicker{to{transform:scale(.75);opacity:.7}}
+.cat{font-size:75px;margin-top:0;animation:bounce 1s infinite alternate}
+@keyframes bounce{to{transform:translateY(-9px)}}
+.balloon{
+ position:fixed;bottom:-100px;z-index:10;
+ font-size:35px;pointer-events:none;
+ animation:fly 5s linear forwards
+}
+@keyframes fly{
+ to{transform:translateY(-120vh) rotate(25deg);opacity:0}
+}
+.card{
+ background:#ffffff16;border:1px solid #ffffff40;
+ border-radius:22px;padding:20px;margin:18px 0;
+ box-shadow:0 0 20px #ff4fa533
+}
+.envelope{font-size:100px;cursor:pointer;animation:bounce 1s infinite alternate}
+.gift{font-size:65px;cursor:pointer;display:inline-block;margin:12px}
+.gift:active{transform:scale(1.15)}
+#wishPhoto{width:100%;max-width:280px;border-radius:20px}
+#letter{white-space:pre-line}
+footer{padding:25px;color:#ffd6ee}
+</style>
+</head>
+
+<body>
+
+<div class="screen" id="welcome">
+ <h1>🎉 A Special Day for Krishna 🎉</h1>
+ <p>Someone special has a birthday today! 💖</p>
+ <div style="font-size:75px">🎁🎈🎊</div>
+ <button onclick="startBirthday()">OPEN YOUR SURPRISE 💝</button>
+ <p style="font-size:13px">Made with ❤️ for Krishna</p>
+</div>
+
+<div class="screen hidden" id="birthday">
+ <h1>🎂 Special Happy Birthday to You, Dear Krishna! 🎂</h1>
+ <p>Wait... your birthday cake is being prepared! ✨</p>
+
+ <div id="cakeArea">
+  <div class="cake c1"></div>
+  <div class="cake c2"></div>
+  <div class="cake c3"></div>
+  <div class="candle" id="candle"></div>
+  <div class="flame" id="flame"></div>
+ </div>
+
+ <div class="cat">🐱</div>
+ <h2 id="catText">Meow! Krishna, make a wish! 💖</h2>
+ <p id="instruction">Close your eyes and make a beautiful birthday wish! ✨</p>
+ <button id="blowBtn" onclick="blowCandles()">💨 Blow the Candles</button>
+ <p id="afterBlow"></p>
+</div>
+
+<div class="screen hidden" id="letterScreen">
+ <h1>💌 A Little Surprise for You 💌</h1>
+ <p>Your birthday surprises are waiting inside!</p>
+ <div class="card" onclick="openGifts()" style="cursor:pointer">
+  <div class="envelope">💌</div>
+  <h2>Tap to Open Your Surprise</h2>
+  <p>✨ Made especially for you ✨</p>
+ </div>
+</div>
+
+<div class="screen hidden" id="giftsScreen">
+ <h1>🎁 Three Special Surprises 🎁</h1>
+ <p>Open every gift to discover something special! 🎈</p>
+
+ <div class="card">
+  <div class="gift" onclick="openGift(1)">🎁</div>
+  <h3>Surprise 1: Your Special Photo 📸</h3>
+  <div id="gift1" class="hidden">
+   <p>Every birthday deserves a beautiful memory! 💖</p>
+   <input type="file" accept="image/*" onchange="showPhoto(event)">
+   <p><small>Select Krishna's photo from your device.</small></p>
+   <img id="wishPhoto" class="hidden" alt="Birthday memory">
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="gift" onclick="openGift(2)">🎁</div>
+  <h3>Surprise 2: Birthday Wishes 💌</h3>
+  <div id="gift2" class="hidden">
+   <h2>🎂 Happy Birthday, Krishna! 🎂</h2>
+   <p>
+    May your life always be filled with happiness,
+    laughter, love and beautiful memories. ❤️
+    May every dream you have come true,
+    and may your smile shine brighter every day.
+    Keep being the amazing person you are.
+    Wishing you a wonderful birthday and an
+    incredible year ahead! 🎉🎈
+   </p>
+  </div>
+ </div>
+
+ <div class="card">
+  <div class="gift" onclick="openGift(3)">🎁</div>
+  <h3>Surprise 3: Friendship Forever 🫂</h3>
+  <div id="gift3" class="hidden">
+   <h2>Friends Today, Friends Tomorrow! ❤️</h2>
+   <p>
+    Life becomes more beautiful when we have
+    friends who make us smile.
+    May your life be full of unforgettable moments,
+    exciting adventures and endless happiness.
+    Happy Birthday, Krishna! 🥳
+   </p>
+   <div style="font-size:60px">🎉🎂🎈💖🎊</div>
+   <h2>Once Again, Happy Birthday! 🎂</h2>
+  </div>
+ </div>
+
+ <button onclick="celebrate()">🎈 More Balloons!</button>
+</div>
+
+<footer>✨ A little birthday magic, made with love ❤️ ✨</footer>
+
+<script>
+let started=false;
+let blown=false;
+let opened=0;
+let musicTimer=null;
+let audioCtx=null;
+
+function balloons(n=12){
+ const emojis=['🎈','🎈','🎈','💖','🎉','🎊'];
+ for(let i=0;i<n;i++){
+  let b=document.createElement('div');
+  b.className='balloon';
+  b.textContent=emojis[Math.floor(Math.random()*emojis.length)];
+  b.style.left=Math.random()*95+'vw';
+  b.style.animationDuration=(4+Math.random()*4)+'s';
+  b.style.fontSize=(25+Math.random()*22)+'px';
+  document.body.appendChild(b);
+  setTimeout(()=>b.remove(),8500);
+ }
+}
+
+function speak(text){
+ if(!('speechSynthesis' in window))return;
+ speechSynthesis.cancel();
+ let msg=new SpeechSynthesisUtterance(text);
+ msg.lang='en-US';
+ msg.rate=.88;
+ msg.pitch=1.15;
+ speechSynthesis.speak(msg);
+}
+
+function startBirthday(){
+ if(started)return;
+ started=true;
+ document.getElementById('welcome').classList.add('hidden');
+ document.getElementById('birthday').classList.remove('hidden');
+ balloons(25);
+
+ speak('Special Happy Birthday to you, dear Krishna!');
+ setTimeout(()=>{
+  balloons(15);
+ },2500);
+
+ setTimeout(()=>{
+  if(!blown){
+   extinguish();
+  }
+ },5000);
+}
+
+function blowCandles(){
+ if(blown)return;
+ blown=true;
+ extinguish();
+ document.getElementById('catText').textContent='Meow! Amazing, Krishna! 🐱💖';
+ document.getElementById('instruction').textContent='Your birthday wish is on its way! ✨';
+ document.getElementById('afterBlow').textContent='🎉 Make this year unforgettable! 🎉';
+ speak('Yay! Happy Birthday, Krishna!');
+}
+
+function extinguish(){
+ document.getElementById('flame').classList.add('hidden');
+ document.getElementById('blowBtn').classList.add('hidden');
+ document.getElementById('catText').textContent='Meow! Happy Birthday, Krishna! 🐱';
+ document.getElementById('instruction').textContent='Your surprises are waiting! 💖';
+ setTimeout(()=>{
+  document.getElementById('birthday').classList.add('hidden');
+  document.getElementById('letterScreen').classList.remove('hidden');
+  balloons(20);
+ },2500);
+}
+
+function openGifts(){
+ document.getElementById('letterScreen').classList.add('hidden');
+ document.getElementById('giftsScreen').classList.remove('hidden');
+ balloons(25);
+ speak('Here are three special surprises for you!');
+}
+
+function openGift(n){
+ const el=document.getElementById('gift'+n);
+ const wasHidden=el.classList.contains('hidden');
+ el.classList.toggle('hidden');
+ if(wasHidden){
+  opened++;
+  balloons(15);
+  if(n===2)speak('Happy Birthday, dear Krishna!');
+  if(n===3)speak('Friends forever. Happy Birthday!');
+ }
+}
+
+function showPhoto(event){
+ const file=event.target.files[0];
+ if(!file)return;
+ const img=document.getElementById('wishPhoto');
+ img.src=URL.createObjectURL(file);
+ img.classList.remove('hidden');
+}
+
+function celebrate(){
+ balloons(30);
+ speak('Happy Birthday, Krishna!');
+}
+</script>
+
+</body>
+  </html>
